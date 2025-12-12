@@ -19,7 +19,7 @@ locale-gen en_US.UTF-8
 update-locale LC_ALL=en_US.UTF-8 LANG=en_US.UTF-8
 
 # Install some basic tools
-apt install -y curl vim git git-lfs
+apt install -y curl unzip vim git git-lfs
 
 # Fix the keyrings issue of the nVidia CUDA container
 curl -fsSL https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2404/x86_64/3bf863cc.pub | tee /etc/apt/keyrings/nvidia.pub > /dev/null
