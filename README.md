@@ -1,17 +1,5 @@
-InternVLA Training Container
+StarVLA Training Container
 ============================
-
-* Build
-
-  `docker buildx . -t <Container Tag>`
-
-* Run
-
-  Typically, you need to mount your training code and data as a volume. Assuming they are located in the `<Share Directory>`, you can mount them using the `-v` option in the `docker run` command:
-
-  `docker run -v <Share Directory>:/home/worker/share -it --rm --gpus all <Container Tag>`
-
-  The password for the `worker` user is `worker`, in case you need to run commands with `sudo`.
 
 * Docker GPU Support
 
@@ -29,6 +17,28 @@ InternVLA Training Container
   sudo nvidia-ctk runtime configure --runtime=docker
   sudo systemctl restart docker
   ```
+
+* Build
+
+  We strongly recommend adding your user to the `docker` group.
+
+  `sudo usermod -aGdocker $USER`
+
+  After doing so, you can run all the Docker commands without using `sudo`.
+
+  `docker buildx . -t <Container Tag>`
+
+* Run
+
+  Typically, you need to mount your training code and data as a volume. Assuming they are located in the `<Share Directory>`, you can mount them using the `-v` option in the `docker run` command:
+
+  `docker run -v <Share Directory>:/home/worker/share -it --rm --gpus all <Container Tag>`
+
+  The password for the `worker` user is `worker`, in case you need to run commands with `sudo`.
+
+* Switch To the Traning Environment
+
+  `conda activate startvla`
 
 * Remote Connection
 
@@ -62,6 +72,12 @@ InternVLA Training Container
 
   By default, Dev Containers override the container’s entrypoint. Each time you open a terminal in VS Code, it will start as the root user. If you prefer to use the `worker` user instead, you can set "remoteUser" in `.devcontainer/devcontainer.json` to enforce this.
 
+  To pass all GPUs to the container, include a runArgs section in your `.devcontainer/devcontainer.json` file and set it to `["--gpus", "all"]`.
+
   You can also choose the Python executable from the created conda environment by searching for “Python: Select Interpreter” in the Command Palette.
 
   If you are using VS Code on Windows but connecting docker containers on WSL, you need to open the folder in WSL before open it again in Dev Containers.
+
+* AWS CLI
+
+  This container includes the AWS CLI, which you can use to synchronize training data from Amazon S3. You can configure it interactively as needed, or supply credentials and the AWS region, via environment variables by passing `AWS_KEY_ID`, `AWS_KEY`, and `AWS_REGION` to your `docker run` command.

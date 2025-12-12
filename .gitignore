@@ -1,2 +1,3 @@
 share/
 .devcontainer/
+*.code-workspace
