@@ -57,8 +57,8 @@ Running with VastAI
   To create an instance, you need a container registry and tag that are accessible over the internet. You must also provide the environment variables to be passed to the container, along with the disk size in GB and the command to run. For a container built from this repository:
 
   ```
-  vastai create instance <OFFER_ID> --image ghcr.io/luxianzi/starvla-training:<Image Hash>
-                                    --env '-p 22:22 -e SSH_USER_PUBLIC_KEY="ssh-rsa AAAA..."'
+  vastai create instance <OFFER_ID> --image ghcr.io/luxianzi/starvla-training:e7792247d57c9c890d89d7a3316ceb825db44341
+                                    --env '-p 22:22 -e SSH_PUBLIC_KEY="ssh-rsa AAAA..."'
                                     --disk 32
                                     --args /usr/bin/sleep infinity
   ```
@@ -128,10 +128,10 @@ Running with VastAI
 
 * Handle with Unstable Network Connection
 
-  You will need to run the training with `nohup` command, also redirect stderr to the log file and ends with a `&` symbol. `nohup` keeps the command running even the SSH connection breaks. `&` symbol sends the command to the background. For example:
+  You will need to run the training with `nohup` command and ends with a `&` symbol. `nohup` keeps the command running even the SSH connection breaks. `&` symbol sends the command to the background. For example:
 
   ```
-  nohup accelerate launch --config-file config.yaml --num_processes 1 train.py --config_yaml training.yaml > log.txt 2>&1 < /dev/null &
+  nohup accelerate launch --config-file config.yaml --num_processes 1 train.py --config_yaml training.yaml > log.txt &
   ```
 
   You can find the training log in log.txt.
