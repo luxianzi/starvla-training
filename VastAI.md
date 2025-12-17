@@ -58,7 +58,7 @@ Running with VastAI
 
   ```
   vastai create instance <OFFER_ID> --image ghcr.io/luxianzi/starvla-training:e7792247d57c9c890d89d7a3316ceb825db44341
-                                    --env '-p 22:22 -e SSH_PUBLIC_KEY="ssh-rsa AAAA..."'
+                                    --env '-p 22:22 -e SSH_USER_PUBLIC_KEY="ssh-rsa AAAA..."'
                                     --disk 32
                                     --args /usr/bin/sleep infinity
   ```
