@@ -7,9 +7,9 @@ mkdir -p /home/DUMMY_USERNAME/.ssh
 chown DUMMY_USERNAME:DUMMY_USERNAME /home/DUMMY_USERNAME/.ssh
 
 # Create SSH public key file
-if [ -n "$SSH_PUBLIC_KEY" ]; then
+if [ -n "$SSH_USER_PUBLIC_KEY" ]; then
     SSH_AUTHORIZED_KEYS_FILE=/home/DUMMY_USERNAME/.ssh/authorized_keys
-    echo "$SSH_PUBLIC_KEY" > "$SSH_AUTHORIZED_KEYS_FILE"
+    echo "$SSH_USER_PUBLIC_KEY" > "$SSH_AUTHORIZED_KEYS_FILE"
     chmod 600 "$SSH_AUTHORIZED_KEYS_FILE"
     chown DUMMY_USERNAME:DUMMY_USERNAME "$SSH_AUTHORIZED_KEYS_FILE"
     /usr/sbin/sshd

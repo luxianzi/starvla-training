@@ -42,11 +42,11 @@ StarVLA Training Container
 
 * Remote Connection
 
-  This container includes a built-in SSH server. To enable SSH access, expose the SSH port by adding a port-forwarding option to your `docker run` command, and provide an `SSH_PUBLIC_KEY` environment variable. The entrypoint script will automatically install the key inside the container.
+  This container includes a built-in SSH server. To enable SSH access, expose the SSH port by adding a port-forwarding option to your `docker run` command, and provide an `SSH_USER_PUBLIC_KEY` environment variable. The entrypoint script will automatically install the key inside the container.
 
   ```
   docker run \
-    -e SSH_PUBLIC_KEY="<ssh-rsa AAA...>" \
+    -e SSH_USER_PUBLIC_KEY="<ssh-rsa AAA...>" \
     -p <Port number>:22 \
     -v <Share Directory>:/home/worker/share \
     -it --rm --gpus all <Container Tag>
@@ -58,7 +58,7 @@ StarVLA Training Container
   ssh-keygen -t ed25519 -f <Key Storage Path>/<Key Name> -C "<Some Comment>"
   ```
 
-  The content of `SSH_PUBLIC_KEY` can be found in the file `<Key Storage Path>/<Key Name>.pub`, and the file `<Key Storage Path>/<Key Name>` is the corresponding private key for the SSH client. You can connect to the container over SSH using `<Docker Host IP>:<Port number>` and username `worker`.
+  The content of `SSH_USER_PUBLIC_KEY` can be found in the file `<Key Storage Path>/<Key Name>.pub`, and the file `<Key Storage Path>/<Key Name>` is the corresponding private key for the SSH client. You can connect to the container over SSH using `<Docker Host IP>:<Port number>` and username `worker`.
 
   ```
   ssh -i <Key Storage Path>/<Key Name> -p 2222 worker@<Docker Host IP>
