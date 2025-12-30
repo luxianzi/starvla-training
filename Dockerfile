@@ -17,6 +17,10 @@ EXPOSE 22
 COPY ./files/init-aws-cli.sh /usr/bin
 RUN init-aws-cli.sh && rm /usr/bin/init-aws-cli.sh
 
+# Initialize ALICLOUD CLI for synchronizing data
+COPY ./files/init-alicloud-cli.sh /usr/bin
+RUN init-alicloud-cli.sh && rm /usr/bin/init-alicloud-cli.sh
+
 # Note: You can pass the SSH public key and AWS access key ID and key as environment variables when running the
 #       container.
 # Note: We bring up sshd in entrypoint.sh, if we need to bring up other services, please edit the entrypoint.sh

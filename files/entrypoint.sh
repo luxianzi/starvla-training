@@ -32,6 +32,30 @@ if [[ -n "$AWS_KEY_ID" && -n "$AWS_KEY" && -n "$AWS_REGION" ]]; then
     chown DUMMY_USERNAME:DUMMY_USERNAME "$AWS_CONFIG_FILE"
 fi
 
+# Set Aliyun CLI keys
+if [[ -n "$ALICLOUD_KEY_ID" && -n "$ALICLOUD_KEY" && -n "$ALICLOUD_REGION" ]]; then
+    ALICLOUD_CONFIG_PATH=/home/DUMMY_USERNAME/.aliyun
+    ALICLOUD_CONFIG_FILE="$ALICLOUD_CONFIG_PATH/config.json"
+    mkdir -p "$ALICLOUD_CONFIG_PATH"
+    printf "{" > "$ALICLOUD_CONFIG_FILE"
+    printf "\t\"current\": \"default\",\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "\t\"profiles\": [\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "\t\t{\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "\t\t\t\"name\": \"default\",\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "\t\t\t\"mode\": \"AK\",\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "\t\t\t\"access_key_id\": \"$ALICLOUD_KEY_ID\",\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "\t\t\t\"access_key_secret\": \"$ALICLOUD_KEY\",\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "\t\t\t\"region_id\": \"cn-beijing\",\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "\t\t\t\"output_format\": \"json\",\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "\t\t\t\"language\": \"en\"\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "\t\t}\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "\t],\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "\t\"meta_path\": \"\"\n" >> "$ALICLOUD_CONFIG_FILE"
+    printf "}\n" >> "$ALICLOUD_CONFIG_FILE"
+    chmod 600 "$ALICLOUD_CONFIG_FILE"
+    chown DUMMY_USERNAME:DUMMY_USERNAME "$ALICLOUD_CONFIG_FILE"
+fi
+
 # Fix cuda library issue on some hosts
 if [ ! -f "/usr/lib/x86_64-linux-gnu/libcuda.so" ]; then
     ln -s /usr/lib/x86_64-linux-gnu/libcuda.so.1 /usr/lib/x86_64-linux-gnu/libcuda.so

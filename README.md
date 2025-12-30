@@ -78,6 +78,6 @@ StarVLA Training Container
 
   If you are using VS Code on Windows but connecting docker containers on WSL, you need to open the folder in WSL before open it again in Dev Containers.
 
-* AWS CLI
+* AWS / ALICLOUD CLI
 
-  This container includes the AWS CLI, which you can use to synchronize training data from Amazon S3. You can configure it interactively as needed, or supply credentials and the AWS region, via environment variables by passing `AWS_KEY_ID`, `AWS_KEY`, and `AWS_REGION` to your `docker run` command.
+  This container includes the AWS and ALICLOUD CLI, which you can use to synchronize training data from Amazon S3 or Alicloud OSS. You can configure it interactively as needed, or supply credentials and the AWS/ALICLOUD region, via environment variables by passing `AWS_KEY_ID` / `ALICLOUD_KEY_ID`, `AWS_KEY` / `ALICLOUD_KEY`, and `AWS_REGION` / `ALICLOUD_REGION` to your `docker run` command.
